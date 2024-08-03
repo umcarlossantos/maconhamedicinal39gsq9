@@ -51,11 +51,10 @@
     <body style="margin: 0; overflow: hidden;">
         <button id="playButton" onclick="playVideo()">PLAY</button>
         <a-scene
+            embedded
+            arjs="sourceType: webcam; debugUIEnabled: false;"
             vr-mode-ui="enabled: false"
             loading-screen="enabled: false;"
-            arjs='sourceType: webcam; debugUIEnabled: false;'
-            id="scene"
-            embedded
             gesture-detector
         >
             <a-assets>
@@ -67,9 +66,7 @@
                     loop
                     crossorigin
                     webkit-playsinline
-                    autoplay
                     playsinline
-                    controls
                 ></video>
             </a-assets>
 
@@ -78,18 +75,13 @@
                 preset="custom"
                 url="assets/marker.patt"
                 videohandler
-                smooth="true"
-                smoothCount="10"
-                smoothTolerance="0.01"
-                smoothThreshold="5"
-                raycaster="objects: .clickable"
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA"
             >
                 <a-plane
                     src="#vid"
-                    scale="6 12 1"
+                    scale="3 6 1"
                     position="0 2.835 0"
                     rotation="0 0 0"
                     class="clickable"
