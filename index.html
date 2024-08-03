@@ -13,7 +13,6 @@
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
-                        this.vid.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
@@ -22,10 +21,17 @@
                     }.bind(this));
                 },
             });
+
+            function playVideo() {
+                var video = document.querySelector("#vid");
+                video.muted = false;
+                video.play();
+            }
         </script>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
+        <button onclick="playVideo()" style="position: absolute; top: 10px; left: 10px; z-index: 10;">Play Video</button>
         <a-scene
             vr-mode-ui="enabled: false"
             loading-screen="enabled: false;"
@@ -44,8 +50,8 @@
                     crossorigin
                     webkit-playsinline
                     autoplay
-                    controls
                     playsinline
+                    controls
                 ></video>
             </a-assets>
 
@@ -65,7 +71,7 @@
             >
                 <a-video
                     src="#vid"
-                    scale="24 12 1"
+                    scale="9 18 1"
                     position="0 0 0"
                     rotation="-90 0 0"
                     class="clickable"
