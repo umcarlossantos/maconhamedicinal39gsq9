@@ -7,64 +7,68 @@
             AFRAME.registerComponent('videohandler', {
                 init: function () {
                     var marker = this.el;
-                    this.vidContainer = document.querySelector("#vidContainer");
                     this.vid = document.querySelector("#vid");
 
                     marker.addEventListener('markerFound', function () {
-                        this.vidContainer.style.display = "flex";
                         this.vid.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
-                        this.vidContainer.style.display = "none";
                         this.vid.pause();
                     }.bind(this));
                 },
             });
+
+            function playVideo() {
+                var video = document.querySelector("#vid");
+                video.muted = false;
+                video.play();
+                document.getElementById("playButton").style.display = "none";
+            }
         </script>
         <style>
-            #vidContainer {
+            #playButton {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 50%;
-                height: auto;
-                display: none; /* Initially hidden */
-                justify-content: center;
-                align-items: center;
-                background-color: black;
-                overflow: hidden;
-                z-index: 5;
+                padding: 20px 40px;
+                font-size: 24px;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                z-index: 10;
             }
             video {
-                width: 100%;
-                height: auto;
-                object-fit: contain;
+                display: none; /* Hide the video element itself */
             }
         </style>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
-        <div id="vidContainer">
-            <video
-                id="vid"
-                src="assets/asset.mp4"
-                preload="auto"
-                response-type="arraybuffer"
-                loop
-                crossorigin
-                webkit-playsinline
-                playsinline
-                controls
-            ></video>
-        </div>
+        <button id="playButton" onclick="playVideo()">PLAY</button>
         <a-scene
             embedded
             arjs="sourceType: webcam; debugUIEnabled: false;"
             vr-mode-ui="enabled: false"
             loading-screen="enabled: false;"
         >
+            <a-assets>
+                <video
+                    id="vid"
+                    src="assets/asset.mp4"
+                    preload="auto"
+                    response-type="arraybuffer"
+                    loop
+                    crossorigin
+                    webkit-playsinline
+                    playsinline
+                    controls
+                ></video>
+            </a-assets>
+
             <a-marker
                 type="pattern"
                 preset="custom"
@@ -74,8 +78,15 @@
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA"
             >
-                <!-- O marcador ainda é usado para detecção -->
+                <a-video
+                    src="#vid"
+                    width="1.0"  <!-- Ajuste a largura conforme necessário -->
+                    height="1.78" <!-- Ajuste a altura conforme necessário -->
+                    position="0 0 0"
+                    rotation="0 0 0"
+                ></a-video>
             </a-marker>
+
             <a-entity camera></a-entity>
         </a-scene>
     </body>
