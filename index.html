@@ -13,6 +13,7 @@
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
+                        this.vid.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
@@ -86,11 +87,11 @@
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA"
             >
-                <a-video
+                <a-plane
                     src="#vid"
-                    scale="9 18 1"
+                    scale="6 12 1"
                     position="0 2.835 0"
-                    rotation="-90 0 0"
+                    rotation="0 0 0"
                     class="clickable"
                     gesture-handler
                 ></a-plane>
