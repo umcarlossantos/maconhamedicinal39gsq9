@@ -7,18 +7,17 @@
             AFRAME.registerComponent('videohandler', {
                 init: function () {
                     var marker = this.el;
+                    this.vidContainer = document.querySelector("#vidContainer");
                     this.vid = document.querySelector("#vid");
 
                     marker.addEventListener('markerFound', function () {
-                        if (!this.vid.paused) {
-                            this.vid.play();
-                        }
+                        this.vidContainer.style.display = "flex";
+                        this.vid.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
-                        if (!this.vid.paused) {
-                            this.vid.pause();
-                        }
+                        this.vidContainer.style.display = "none";
+                        this.vid.pause();
                     }.bind(this));
                 },
             });
@@ -52,7 +51,7 @@
                 transform: translate(-50%, -50%);
                 width: 50%;
                 height: auto;
-                display: flex;
+                display: none; /* Initially hidden */
                 justify-content: center;
                 align-items: center;
                 background-color: black;
