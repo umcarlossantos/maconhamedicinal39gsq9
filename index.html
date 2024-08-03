@@ -21,29 +21,8 @@
                     }.bind(this));
                 },
             });
-
-            function playVideo() {
-                var video = document.querySelector("#vid");
-                video.muted = false;
-                video.play();
-                document.getElementById("playButton").style.display = "none";
-            }
         </script>
         <style>
-            #playButton {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 20px 40px;
-                font-size: 24px;
-                background-color: rgba(0, 0, 0, 0.7);
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                z-index: 10;
-            }
             #vidContainer {
                 position: absolute;
                 top: 50%;
@@ -67,7 +46,6 @@
     </head>
 
     <body style="margin: 0; overflow: hidden;">
-        <button id="playButton" onclick="playVideo()">PLAY</button>
         <div id="vidContainer">
             <video
                 id="vid"
