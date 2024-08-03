@@ -33,7 +33,7 @@
                 display: none; /* Initially hidden */
                 justify-content: center;
                 align-items: center;
-                background-color: black;
+                background-color: transparent; /* Ensure no background color */
                 overflow: hidden;
                 z-index: 5;
             }
@@ -41,6 +41,10 @@
                 width: 100%;
                 height: auto;
                 object-fit: contain;
+                background-color: transparent; /* Ensure no background color */
+            }
+            video::-webkit-media-controls {
+                display: none !important; /* Hide media controls to avoid overlay */
             }
         </style>
     </head>
