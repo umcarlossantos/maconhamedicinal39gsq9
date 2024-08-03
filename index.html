@@ -4,6 +4,7 @@
         <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
         <script>
             AFRAME.registerComponent('videohandler', {
                 init: function () {
@@ -44,16 +45,6 @@
                 cursor: pointer;
                 z-index: 10;
             }
-
-            #vidPlane {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 1080px; /* Adjust the width as needed */
-                height: 1920px; /* Adjust the height as needed */
-                z-index: 5;
-            }
         </style>
     </head>
 
@@ -64,6 +55,7 @@
             arjs="sourceType: webcam; debugUIEnabled: false;"
             vr-mode-ui="enabled: false"
             loading-screen="enabled: false;"
+            gesture-detector
         >
             <a-assets>
                 <video
@@ -87,18 +79,19 @@
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA"
             >
-                <!-- The marker is still used for detection but not for displaying the video -->
+                <a-video
+                    src="#vid"
+                    scale="3 6 1"
+                    position="0 3 0"
+                    rotation="0 0 0"
+                    class="clickable"
+                    gesture-handler
+                ></a-video>
             </a-marker>
-
-            <a-plane
-                id="vidPlane"
-                src="#vid"
-                scale="3 6 1"
-                position="0 2 0"
-                rotation="-90 0 0"
-            ></a-plane>
 
             <a-entity camera></a-entity>
         </a-scene>
     </body>
 </html>
+
+
