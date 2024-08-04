@@ -38,7 +38,6 @@
                 crossorigin="anonymous"
                 webkit-playsinline
                 playsinline
-                controls
             ></video>
         </a-assets>
 
@@ -51,18 +50,18 @@
             cursor="fuse: false; rayOrigin: mouse;"
             id="markerA"
         >
-            <a-video
+            <a-plane
                 src="#vid"
                 width="1.0"  <!-- Ajuste a largura conforme necessário -->
                 height="1.5" <!-- Ajuste a altura conforme necessário -->
                 position="0 0 0"
-                rotation="0 0 0"
+                rotation="-90 0 0"
                 autoplay
                 loop
                 crossorigin="anonymous"
                 webkit-playsinline
                 playsinline
-            ></a-video>
+            ></a-plane>
         </a-marker>
 
         <a-entity camera></a-entity>
