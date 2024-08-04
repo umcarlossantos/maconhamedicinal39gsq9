@@ -1,52 +1,34 @@
 <!doctype html>
 <html>
-    <head>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-        <script>
-            AFRAME.registerComponent('videohandler', {
-                init: function () {
-                    var marker = this.el;
-                    this.vidContainer = document.querySelector("#vidContainer");
-                    this.vid = document.querySelector("#vid");
+<head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script>
+        AFRAME.registerComponent('videohandler', {
+            init: function () {
+                var marker = this.el;
+                this.vid = document.querySelector("#vid");
 
-                    marker.addEventListener('markerFound', function () {
-                        this.vidContainer.style.display = "flex";
-                        this.vid.play();
-                    }.bind(this));
+                marker.addEventListener('markerFound', function () {
+                    this.vid.play();
+                }.bind(this));
 
-                    marker.addEventListener('markerLost', function () {
-                        this.vidContainer.style.display = "none";
-                        this.vid.pause();
-                    }.bind(this));
-                },
-            });
-        </script>
-        <style>
-            #vidContainer {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 50%;
-                height: auto;
-                display: none; /* Initially hidden */
-                justify-content: center;
-                align-items: center;
-                background-color: black;
-                overflow: hidden;
-                z-index: 5;
-            }
-            video {
-                width: 100%;
-                height: auto;
-                object-fit: contain;
-            }
-        </style>
-    </head>
+                marker.addEventListener('markerLost', function () {
+                    this.vid.pause();
+                }.bind(this));
+            },
+        });
+    </script>
+</head>
 
-    <body style="margin: 0; overflow: hidden;">
-        <div id="vidContainer">
+<body style="margin: 0; overflow: hidden;">
+    <a-scene
+        embedded
+        arjs="sourceType: webcam; debugUIEnabled: false;"
+        vr-mode-ui="enabled: false"
+        loading-screen="enabled: false;"
+    >
+        <a-assets>
             <video
                 id="vid"
                 src="assets/asset.mp4"
@@ -58,27 +40,27 @@
                 playsinline
                 controls
             ></video>
-        </div>
-        <a-scene
-            embedded
-            arjs="sourceType: webcam; debugUIEnabled: false;"
-            vr-mode-ui="enabled: false"
-            loading-screen="enabled: false;"
+        </a-assets>
+
+        <a-marker
+            type="pattern"
+            preset="custom"
+            url="assets/marker.patt"
+            videohandler
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerA"
         >
-            <a-marker
-                type="pattern"
-                preset="custom"
-                url="assets/marker.patt"
-                videohandler
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
-            >
-                <!-- O marcador ainda é usado para detecção -->
-            </a-marker>
-            <a-entity camera></a-entity>
-        </a-scene>
-    </body>
+            <a-video
+                src="#vid"
+                width="1.0"  <!-- Ajuste a largura conforme necessário -->
+                height="1.5" <!-- Ajuste a altura conforme necessário -->
+                position="0 0 0"
+                rotation="0 0 0"
+            ></a-video>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
 </html>
-
-
